@@ -112,58 +112,107 @@ const Blogs = () => {
         {loading ? (
           <Loader />
         ) : blogs.length > 0 ? (
-          <Table
-            dataSource={blogs}
-            rowKey="_id"
-            scroll={{
-              x: 1000,
-            }}
-          >
-            <Column
-              fixed="left"
-              title="Banner"
-              dataIndex="banner"
-              key="banner"
-              width="100px"
-              render={(banner) => (
-                <img
-                  src={`http://localhost:8000${banner}`}
-                  alt="banner"
-                  style={{ width: "100px", height: "50px" }}
-                />
-              )}
-            />
-            <Column title="Title" dataIndex="title" key="title" />
-            <Column
-              title="Description"
-              key="description"
-              render={(_, record) => (
-                <Space>
-                  <p style={{ color: "#000" }}>
-                    {record?.description?.slice(0, 40)}...
-                  </p>
-                </Space>
-              )}
-            />
-            <Column title="Date" dataIndex="date" key="date" width="150px" />
-            <Column
-              title="Action"
-              key="action"
-              width="150px"
-              render={(_, record) => (
-                <Space size="middle">
-                  <Link to={`/blogs/edit-blog/${record._id}`}>
-                    <Button type="primary">
-                      <EditOutlined />
+          // <Table
+          //   dataSource={blogs}
+          //   rowKey="_id"
+          //   scroll={{
+          //     x: 1000,
+          //   }}
+          // >
+          //   <Column
+          //     fixed="left"
+          //     title="Banner"
+          //     dataIndex="banner"
+          //     key="banner"
+          //     width="100px"
+          //     render={(banner) => (
+          //       <img
+          //         src={`http://localhost:8000${banner}`}
+          //         alt="banner"
+          //         style={{ width: "100px", height: "50px" }}
+          //       />
+          //     )}
+          //   />
+          //   <Column title="Title" dataIndex="title" key="title" />
+          //   <Column
+          //     title="Description"
+          //     key="description"
+          //     render={(_, record) => (
+          //       <Space>
+          //         <p style={{ color: "#000" }}>
+          //           {record?.description?.slice(0, 40)}...
+          //         </p>
+          //       </Space>
+          //     )}
+          //   />
+          //   <Column title="Date" dataIndex="date" key="date" width="150px" />
+          //   <Column
+          //     title="Action"
+          //     key="action"
+          //     width="150px"
+          //     render={(_, record) => (
+          //       <Space size="middle">
+          //         <Link to={`/blogs/edit-blog/${record._id}`}>
+          //           <Button type="primary">
+          //             <EditOutlined />
+          //           </Button>
+          //         </Link>
+          //         <Button type="danger" onClick={() => showConfirm(record._id)}>
+          //           <DeleteOutlined />
+          //         </Button>
+          //       </Space>
+          //     )}
+          //   />
+          // </Table>
+          <div className="blog-card-main">
+            {blogs.map((blog) => (
+              <div className="blog-card-body" key={blog._id}>
+                <div className="blog-card-left">
+                  <img src={`http://localhost:8000${blog.banner}`} alt="" />
+                </div>
+                <div className="blog-card-right">
+                  <h1 style={{ margin: "0" }}>{blog.title}</h1>
+                  <p>{blog.description}</p>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "5px",
+                      marginTop: "10px",
+                    }}
+                  >
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <p>{blog.author}</p>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "5px",
+                      margin: "10px 0",
+                    }}
+                  >
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <p>{blog.date}</p>
+                  </div>
+                  <div>
+                    <Link to={`/blogs/edit-blog/${blog._id}`}>
+                      <Button type="primary">
+                        <EditOutlined />
+                      </Button>
+                    </Link>
+                    <Button
+                      type="danger"
+                      onClick={() => showConfirm(blog._id)}
+                      style={{ marginLeft: "10px" }}
+                    >
+                      <DeleteOutlined />
                     </Button>
-                  </Link>
-                  <Button type="danger" onClick={() => showConfirm(record._id)}>
-                    <DeleteOutlined />
-                  </Button>
-                </Space>
-              )}
-            />
-          </Table>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         ) : (
           <Loader />
         )}

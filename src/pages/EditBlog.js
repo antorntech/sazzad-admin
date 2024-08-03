@@ -46,6 +46,8 @@ export const EditBlog = () => {
     // Append other form data
     formData.append("title", values.title);
     formData.append("description", values.description);
+    formData.append("date", values.date);
+    formData.append("author", values.author);
     setUploading(true);
     // You can use any AJAX library you like
     fetch(`http://localhost:8000/api/v1/blogs/update/${id}`, {
@@ -132,6 +134,38 @@ export const EditBlog = () => {
                 >
                   <TextArea rows={6} />
                 </Form.Item>
+                <Row gutter={[24, 0]}>
+                  <Col xs={24} md={12} lg={12}>
+                    <Form.Item
+                      name="author"
+                      label="Author"
+                      placeholder="Enter author"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please enter blog author",
+                        },
+                      ]}
+                    >
+                      <Input />
+                    </Form.Item>
+                  </Col>
+                  <Col xs={24} md={12} lg={12}>
+                    <Form.Item
+                      name="date"
+                      label="Date"
+                      placeholder="Enter date"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please enter blog date",
+                        },
+                      ]}
+                    >
+                      <Input />
+                    </Form.Item>
+                  </Col>
+                </Row>
                 <Form.Item
                   name="banner"
                   label="Upload banner"
