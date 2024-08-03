@@ -1,6 +1,15 @@
 import React, { useState } from "react";
 import { UploadOutlined } from "@ant-design/icons";
-import { Form, Input, Upload, Button, message, Row, Col } from "antd";
+import {
+  Form,
+  Input,
+  Upload,
+  Button,
+  message,
+  Row,
+  Col,
+  InputNumber,
+} from "antd";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const AddHeroContent = () => {
@@ -22,7 +31,7 @@ const AddHeroContent = () => {
     formData.append("title", values.title);
     formData.append("facebookLink", values.facebookLink);
     formData.append("linkedinLink", values.linkedinLink);
-    formData.append("whatsappNumber", values.whatsappNumber);
+    formData.append("whatsappNumber", "+880" + values.whatsappNumber);
     setUploading(true);
     // You can use any AJAX library you like
     fetch("http://localhost:8000/api/v1/herocontent/add", {
@@ -124,7 +133,7 @@ const AddHeroContent = () => {
                     },
                   ]}
                 >
-                  <Input />
+                  <InputNumber style={{ width: "100%" }} prefix="+880" />
                 </Form.Item>
                 <Form.Item
                   name="banner"

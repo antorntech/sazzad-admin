@@ -137,15 +137,33 @@ const HeroContent = () => {
             />
             <Column title="Title" dataIndex="title" key="title" />
             <Column
-              title="Description"
-              key="description"
+              title="Facebook Link"
               render={(_, record) => (
-                <Space>
-                  <p style={{ color: "#000" }}>
-                    {record.description.slice(0, 40)}...
-                  </p>
-                </Space>
+                <a
+                  href={record.facebookLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {record.facebookLink}
+                </a>
               )}
+            />
+            <Column
+              title="Linkedin Link"
+              render={(_, record) => (
+                <a
+                  href={record.linkedinLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {record.linkedinLink}
+                </a>
+              )}
+            />
+            <Column
+              title="Whatsapp Number"
+              dataIndex="whatsappNumber"
+              key="whatsappNumber"
             />
             <Column
               title="Action"
