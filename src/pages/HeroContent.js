@@ -138,27 +138,15 @@ const HeroContent = () => {
             <Column title="Title" dataIndex="title" key="title" />
             <Column
               title="Facebook Link"
-              render={(_, record) => (
-                <a
-                  href={record.facebookLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {record.facebookLink}
-                </a>
-              )}
+              render={(_, record) =>
+                record.facebookLink ? "Link Available" : "Link Not Available"
+              }
             />
             <Column
               title="Linkedin Link"
-              render={(_, record) => (
-                <a
-                  href={record.linkedinLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {record.linkedinLink}
-                </a>
-              )}
+              render={(_, record) =>
+                record.linkedinLink ? "Link Available" : "Link Not Available"
+              }
             />
             <Column
               title="Whatsapp Number"
