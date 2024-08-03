@@ -5,6 +5,7 @@ function Home() {
   const [events, setEvents] = useState([]);
   const [news, setNews] = useState([]);
   const [blogs, setBlogs] = useState([]);
+  const [association, setAssociation] = useState([]);
   const { Title } = Typography;
 
   const token = JSON.parse(localStorage.getItem("token"));
@@ -89,6 +90,26 @@ function Home() {
       });
   }, [token]);
 
+  // Get all association
+  useEffect(() => {
+    fetch("http://localhost:8000/api/v1/association", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data && data.length > 0) {
+          setAssociation(data);
+        } else {
+          // Perform some action or set a message indicating that there is no data to reverse
+          console.log("No data found to reverse!");
+        }
+      });
+  }, [token]);
+
   const count = [
     {
       title: "Total Task List",
@@ -114,6 +135,15 @@ function Home() {
     {
       title: "Total Blogs",
       count: `${blogs && blogs.length > 0 ? blogs.length : 0}`,
+      icon: <i class="fa-solid fa-list-check icon"></i>,
+      bnb: "bnb",
+    },
+
+    {
+      title: "Total Association",
+      count: `${
+        association && association.length > 0 ? association.length : 0
+      }`,
       icon: <i class="fa-solid fa-list-check icon"></i>,
       bnb: "bnb",
     },

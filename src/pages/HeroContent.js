@@ -95,7 +95,9 @@ const HeroContent = () => {
           }}
         >
           <div>
-            <h1>Hero Content</h1>
+            <h1 style={{ fontSize: "20px", fontWeight: "bold", margin: "0px" }}>
+              Hero Content
+            </h1>
             <p>
               Hero contents are{" "}
               {heroContent.length > 0 ? "available." : "not available."}
@@ -122,55 +124,69 @@ const HeroContent = () => {
         {loading ? (
           <Loader />
         ) : heroContent.length > 0 ? (
-          <Table dataSource={heroContent} rowKey="_id">
-            <Column
-              title="Banner"
-              dataIndex="banner"
-              key="banner"
-              width="200px"
-              render={(banner) => (
-                <img
-                  src={`http://localhost:8000${banner}`}
-                  style={{ width: "250px", height: "150px" }}
-                />
-              )}
-            />
-            <Column title="Title" dataIndex="title" key="title" />
-            <Column
-              title="Facebook Link"
-              render={(_, record) =>
-                record.facebookLink ? "Link Available" : "Link Not Available"
-              }
-            />
-            <Column
-              title="Linkedin Link"
-              render={(_, record) =>
-                record.linkedinLink ? "Link Available" : "Link Not Available"
-              }
-            />
-            <Column
-              title="Whatsapp Number"
-              dataIndex="whatsappNumber"
-              key="whatsappNumber"
-            />
-            <Column
-              title="Action"
-              key="action"
-              width="100px"
-              render={(_, record) => (
-                <Space size="middle">
-                  <Link to={`/edit-hero-content/${record._id}`}>
-                    <Button type="primary">
-                      <EditOutlined />
+          <div>
+            {heroContent.map((hero) => (
+              <div
+                className="hero-content-card"
+                key={hero._id}
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  gap: "20px",
+                }}
+              >
+                <div style={{ width: "40%" }}>
+                  <img src={`http://localhost:8000${hero.banner}`} alt="" />
+                </div>
+                <div style={{ width: "60%" }}>
+                  <h1
+                    style={{
+                      fontSize: "20px",
+                      fontWeight: "bold",
+                      width: "80%",
+                    }}
+                  >
+                    {hero.title}
+                  </h1>
+                  <p>
+                    <span style={{ fontWeight: "bold" }}>Facebook Link:</span>{" "}
+                    {hero.facebookLink ? hero.facebookLink : "Not Available"}
+                  </p>
+                  <p>
+                    <span style={{ fontWeight: "bold" }}>Linkedin Link:</span>{" "}
+                    {hero.linkedinLink ? hero.linkedinLink : "Not Available"}
+                  </p>
+                  <p>
+                    <span style={{ fontWeight: "bold" }}>Whatsapp Number:</span>{" "}
+                    {hero.whatsappNumber}
+                  </p>
+                  <p>
+                    <span style={{ fontWeight: "bold" }}>
+                      Youtube Video Link:
+                    </span>{" "}
+                    <a href={hero.youtubeVideoLink} target="_blank">
+                      Watch Video
+                    </a>
+                  </p>
+                  <div>
+                    <Link to={`/edit-hero-content/${hero._id}`}>
+                      <Button type="primary">
+                        <EditOutlined />
+                      </Button>
+                    </Link>
+                    <Button
+                      type="danger"
+                      onClick={() => showConfirm(hero._id)}
+                      style={{ marginLeft: "10px" }}
+                    >
+                      <DeleteOutlined />
                     </Button>
-                  </Link>
-                  <Button type="danger" onClick={() => showConfirm(record._id)}>
-                    <DeleteOutlined />
-                  </Button>
-                </Space>
-              )}
-            />
-          </Table>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         ) : (
           <Loader />
         )}

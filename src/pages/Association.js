@@ -13,14 +13,14 @@ import Loader from "../components/shared/loader/Loader";
 const { confirm } = Modal;
 const { Column } = Table;
 
-const TaskList = () => {
-  const [taskList, setTaskList] = useState([]);
+const Association = () => {
+  const [association, setAssociation] = useState([]);
   const [loading, setLoading] = useState(true); // Initially set loading to true
 
-  const getTaskList = async () => {
+  const getAssociation = async () => {
     const token = JSON.parse(localStorage.getItem("token"));
     try {
-      fetch("http://localhost:8000/api/v1/tasklist", {
+      fetch("http://localhost:8000/api/v1/association", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -29,7 +29,7 @@ const TaskList = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          setTaskList(data);
+          setAssociation(data);
           setLoading(false); // Set loading to false after fetching
         })
         .catch((error) => {
@@ -42,13 +42,13 @@ const TaskList = () => {
   };
 
   useEffect(() => {
-    getTaskList();
+    getAssociation();
   }, []);
 
   // Delete task from the list
   const handleDelete = (id) => {
     setLoading(true); // Set loading state to true
-    fetch(`http://localhost:8000/api/v1/tasklist/delete/${id}`, {
+    fetch(`http://localhost:8000/api/v1/association/delete/${id}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",
@@ -56,11 +56,11 @@ const TaskList = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        toast.success("Task List Deleted Successfully", {
+        toast.success("Association Deleted Successfully", {
           autoClose: 1000,
         });
         // Fetch updated list after successful deletion
-        getTaskList();
+        getAssociation();
       })
       .catch((error) => {
         console.error("Error deleting task list item:", error);
@@ -98,25 +98,25 @@ const TaskList = () => {
           }}
         >
           <div>
-            <h1>Task List</h1>
+            <h1>Association</h1>
             <p>
-              Task Lists are{" "}
-              {taskList.length > 0 ? "available." : "not available."}
+              Associations are{" "}
+              {association.length > 0 ? "available." : "not available."}
             </p>
           </div>
           <div>
-            {taskList.length === 4 ? (
+            {association.length === 4 ? (
               <Button type="primary" disabled>
-                <Link to="/add-task-list">
+                <Link to="/add-association">
                   <PlusOutlined style={{ marginRight: "5px" }} />
-                  Add Task List
+                  Add Association
                 </Link>
               </Button>
             ) : (
               <Button type="primary" className="primary-btn">
-                <Link to="/add-task-list">
+                <Link to="/add-association">
                   <PlusOutlined style={{ marginRight: "5px" }} />
-                  Add Task List
+                  Add Association
                 </Link>
               </Button>
             )}
@@ -124,16 +124,21 @@ const TaskList = () => {
         </div>
         {loading ? (
           <Loader />
-        ) : taskList.length > 0 ? (
+        ) : association.length > 0 ? (
           <div className="card-main">
-            {taskList.map((task) => (
+            {association.map((task) => (
               <div className="card-body" key={task._id}>
                 <div>
-                  <img src={`http://localhost:8000${task.icon}`} alt="" />
+                  <img
+                    src={`http://localhost:8000${task.logo}`}
+                    alt=""
+                    style={{ width: "132px", height: "60px" }}
+                  />
                 </div>
-                <h1>{task.title}</h1>
+                <h1 style={{ margin: "0" }}>{task.title}</h1>
+                <p>{task.subtitle}</p>
                 <div>
-                  <Link to={`/edit-task-list/${task._id}`}>
+                  <Link to={`/edit-association/${task._id}`}>
                     <Button type="primary">
                       <EditOutlined />
                     </Button>
@@ -157,4 +162,4 @@ const TaskList = () => {
   );
 };
 
-export default TaskList;
+export default Association;

@@ -20,6 +20,9 @@ import About from "./pages/About";
 import AddAbout from "./pages/AddAbout";
 import EditAbout from "./pages/EditAbout";
 import Notification from "./pages/Notification";
+import Association from "./pages/Association";
+import AddAssociation from "./pages/AddAssociation";
+import EditAssociation from "./pages/EditAssociation";
 
 function App() {
   const user = JSON.parse(localStorage.getItem("token"));
@@ -46,6 +49,13 @@ function App() {
             <Route exact path="/about" component={About} />
             <Route exact path="/about/add-about" component={AddAbout} />
             <Route exact path="/about/edit-about/:id" component={EditAbout} />
+            <Route exact path="/association" component={Association} />
+            <Route exact path="/add-association" component={AddAssociation} />
+            <Route
+              exact
+              path="/edit-association/:id"
+              component={EditAssociation}
+            />
             <Route exact path="/notification" component={Notification} />
             <Redirect from="*" to="/dashboard" />
           </Main>

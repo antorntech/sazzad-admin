@@ -32,6 +32,7 @@ const AddHeroContent = () => {
     formData.append("facebookLink", values.facebookLink);
     formData.append("linkedinLink", values.linkedinLink);
     formData.append("whatsappNumber", "+880" + values.whatsappNumber);
+    formData.append("youtubeVideoLink", values.youtubeVideoLink);
     setUploading(true);
     // You can use any AJAX library you like
     fetch("http://localhost:8000/api/v1/herocontent/add", {
@@ -134,6 +135,19 @@ const AddHeroContent = () => {
                   ]}
                 >
                   <InputNumber style={{ width: "100%" }} prefix="+880" />
+                </Form.Item>
+                <Form.Item
+                  name="youtubeVideoLink"
+                  label="Youtube Video Link"
+                  placeholder="Enter youtube video link"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please enter youtube video link",
+                    },
+                  ]}
+                >
+                  <Input />
                 </Form.Item>
                 <Form.Item
                   name="banner"

@@ -1,5 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Form, Input, Button, message, Row, Col, Upload } from "antd";
+import {
+  Form,
+  Input,
+  Button,
+  message,
+  Row,
+  Col,
+  Upload,
+  InputNumber,
+} from "antd";
 import { useHistory, useParams } from "react-router-dom";
 import { UploadOutlined } from "@ant-design/icons";
 
@@ -44,7 +53,10 @@ const EditHeroContent = () => {
 
     // Append other form data
     formData.append("title", values.title);
-    formData.append("description", values.description);
+    formData.append("facebookLink", values.facebookLink);
+    formData.append("linkedinLink", values.linkedinLink);
+    formData.append("whatsappNumber", "+880" + values.whatsappNumber);
+    formData.append("youtubeVideoLink", values.youtubeVideoLink);
     setUploading(true);
 
     // You can use any AJAX library you like
@@ -113,24 +125,63 @@ const EditHeroContent = () => {
                   rules={[
                     {
                       required: true,
-                      message: "Please enter hero content title",
+                      message: "Please enter product title",
                     },
                   ]}
                 >
                   <Input />
                 </Form.Item>
                 <Form.Item
-                  name="description"
-                  label="Description"
-                  placeholder="Enter description"
+                  name="facebookLink"
+                  label="Facebook Link"
+                  placeholder="Enter facebook link"
                   rules={[
                     {
                       required: true,
-                      message: "Please enter description",
+                      message: "Please enter facebook link",
                     },
                   ]}
                 >
-                  <Input.TextArea rows={6} />
+                  <Input />
+                </Form.Item>
+                <Form.Item
+                  name="linkedinLink"
+                  label="Linkedin Link"
+                  placeholder="Enter linkedin link"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please enter linkedin link",
+                    },
+                  ]}
+                >
+                  <Input />
+                </Form.Item>
+                <Form.Item
+                  name="whatsappNumber"
+                  label="Whatsapp Number"
+                  placeholder="Enter whatsapp number"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please enter whatsapp number",
+                    },
+                  ]}
+                >
+                  <InputNumber style={{ width: "100%" }} prefix="+880" />
+                </Form.Item>
+                <Form.Item
+                  name="youtubeVideoLink"
+                  label="Youtube Video Link"
+                  placeholder="Enter youtube video link"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please enter youtube video link",
+                    },
+                  ]}
+                >
+                  <Input />
                 </Form.Item>
                 <Form.Item
                   name="banner"
