@@ -3144,28 +3144,28 @@ section.ant-layout.ant-layout-has-sider.layout-dashboard.layout-profile
 }
 
 /* blog style */
-.blog-card-body {
+.card-body-wrapper {
   display: flex;
   align-items: center;
   gap: 20px;
   margin: 25px 0px;
 }
 
-.blog-card-left {
+.card-left {
   width: 30%;
 }
-.blog-card-right {
+.card-right {
   width: 70%;
 }
 
-.blog-card-right h1 {
+.card-right h1 {
   font-size: 20px;
   font-weight: bold;
   line-height: 1.5;
   margin: 0;
 }
 
-.blog-card-right p {
+.card-right p {
   width: 95%;
   font-size: 14px;
   font-weight: 400;

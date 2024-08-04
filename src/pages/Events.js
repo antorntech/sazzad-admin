@@ -13,15 +13,15 @@ import Loader from "../components/shared/loader/Loader";
 const { confirm } = Modal;
 const { Column } = Table;
 
-const Blogs = () => {
-  const [blogs, setBlogs] = useState([]);
+const Events = () => {
+  const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(false); // State to manage loading state
 
-  const getBlogs = async () => {
+  const getEvents = async () => {
     setLoading(true); // Set loading state to true
     const token = JSON.parse(localStorage.getItem("token"));
     try {
-      fetch("http://localhost:8000/api/v1/blogs", {
+      fetch("http://localhost:8000/api/v1/events", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -30,7 +30,7 @@ const Blogs = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          setBlogs(data); // Update blogs state with fetched data
+          setEvents(data); // Update events state with fetched data
           setLoading(false); // Set loading state to false after data is fetched
         });
     } catch (error) {
@@ -40,13 +40,13 @@ const Blogs = () => {
   };
 
   useEffect(() => {
-    getBlogs();
+    getEvents();
   }, []);
 
   // Delete hero content item
   const handleDelete = (id) => {
     setLoading(true); // Set loading state to true
-    fetch(`http://localhost:8000/api/v1/blogs/delete/${id}`, {
+    fetch(`http://localhost:8000/api/v1/events/delete/${id}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",
@@ -57,7 +57,7 @@ const Blogs = () => {
         toast.success("Blog Deleted Successfully", {
           autoClose: 1000,
         });
-        getBlogs(); // Fetch updated list after successful deletion
+        getEvents(); // Fetch updated list after successful deletion
       })
       .catch((error) => {
         console.error("Error deleting hero content:", error);
@@ -96,25 +96,25 @@ const Blogs = () => {
         >
           <div>
             <h1 style={{ fontSize: "20px", fontWeight: "bold", margin: "0px" }}>
-              Blog
+              Event
             </h1>
             <p>
-              Blogs are {blogs.length > 0 ? "available." : "not available."}
+              Events are {events.length > 0 ? "available." : "not available."}
             </p>
           </div>
           <div>
             <Button type="primary" className="primary-btn">
-              <Link to="/blogs/add-blog">
+              <Link to="/events/add-event">
                 <PlusOutlined style={{ marginRight: "5px" }} />
-                Add Blog
+                Add Event
               </Link>
             </Button>
           </div>
         </div>
         {loading ? (
           <Loader />
-        ) : blogs.length > 0 ? (
-          <Table dataSource={blogs} rowKey="_id">
+        ) : events.length > 0 ? (
+          <Table dataSource={events} rowKey="_id">
             <Column
               title="Banner"
               dataIndex="banner"
@@ -128,15 +128,23 @@ const Blogs = () => {
               )}
             />
             <Column title="Title" dataIndex="title" key="title" />
-            <Column title="Author" dataIndex="author" key="author" />
-            <Column title="Date" dataIndex="date" key="date" />
+            <Column
+              title="Event Time"
+              render={(_, record) => (
+                <>
+                  {record.eventStartTime} - {record.eventEndTime}
+                </>
+              )}
+            />
+            <Column title="Event Date" dataIndex="date" key="date" />
+            <Column title="Event Location" dataIndex="address" key="address" />
             <Column
               title="Action"
               key="action"
               width="100px"
               render={(_, record) => (
                 <Space size="middle">
-                  <Link to={`/blogs/edit-blog/${record._id}`}>
+                  <Link to={`/events/edit-event/${record._id}`}>
                     <Button type="primary">
                       <EditOutlined />
                     </Button>
@@ -156,4 +164,4 @@ const Blogs = () => {
   );
 };
 
-export default Blogs;
+export default Events;

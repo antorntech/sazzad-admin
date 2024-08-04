@@ -1,8 +1,18 @@
 import { UploadOutlined } from "@ant-design/icons";
-import { Button, Col, Form, Input, Row, Upload, message } from "antd";
+import {
+  Button,
+  Col,
+  DatePicker,
+  Form,
+  Input,
+  Row,
+  Upload,
+  message,
+} from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
+import moment from "moment";
 
 export const EditBlog = () => {
   const navigate = useHistory();
@@ -11,6 +21,7 @@ export const EditBlog = () => {
   const [blogData, setBlogData] = useState({});
   const [bannerFileList, setBannerFileList] = useState([]);
   const [uploading, setUploading] = useState(false);
+  const [date, setDate] = useState(moment()); // Initialize with moment object
 
   useEffect(() => {
     fetch(`http://localhost:8000/api/v1/blogs/${id}`, {
@@ -26,14 +37,22 @@ export const EditBlog = () => {
         return res.json();
       })
       .then((data) => {
+        // Parse date into moment object
+        data.date = moment(data.date, "D MMM - YYYY");
+
         setBlogData(data);
         form.setFieldsValue(data);
+        setDate(moment(data.date)); // Set date state as moment object
       })
       .catch((error) => {
         console.error("Error fetching Blog data:", error);
         message.error("Failed to fetch Blog data");
       });
   }, [id, form]);
+
+  const formatDate = (date) => {
+    setDate(date); // Update date state with moment object
+  };
 
   const handleUpload = (values) => {
     const formData = new FormData();
@@ -46,7 +65,7 @@ export const EditBlog = () => {
     // Append other form data
     formData.append("title", values.title);
     formData.append("description", values.description);
-    formData.append("date", values.date);
+    formData.append("date", date.format("YYYY-MM-DD")); // Format date for backend
     formData.append("author", values.author);
     setUploading(true);
     // You can use any AJAX library you like
@@ -59,7 +78,7 @@ export const EditBlog = () => {
     })
       .then((res) => {
         if (!res.ok) {
-          throw new Error("Failed to update review data");
+          throw new Error("Failed to update blog data");
         }
         return res.json();
       })
@@ -68,8 +87,8 @@ export const EditBlog = () => {
         navigate.push("/blogs");
       })
       .catch((error) => {
-        console.log(error);
-        message.error("Failed to update service data.");
+        console.error("Failed to update blog data:", error);
+        message.error("Failed to update blog data.");
       })
       .finally(() => {
         setUploading(false);
@@ -94,9 +113,9 @@ export const EditBlog = () => {
     <>
       <div>
         <h1 style={{ fontSize: "20px", fontWeight: "bold", margin: "0px" }}>
-          Edit Service
+          Edit Blog
         </h1>
-        <p>You can edit service from here.</p>
+        <p>You can edit blog from here.</p>
       </div>
       <Row gutter={[24, 0]}>
         <Col xs={24} md={12} lg={12}>
@@ -162,7 +181,15 @@ export const EditBlog = () => {
                         },
                       ]}
                     >
-                      <Input />
+                      <DatePicker
+                        value={moment(date)} // Set value prop to moment object
+                        onChange={(date) => formatDate(date)} // Update date state
+                        style={{
+                          width: "100%",
+                          padding: "7px",
+                          borderRadius: "4px",
+                        }}
+                      />
                     </Form.Item>
                   </Col>
                 </Row>
@@ -172,7 +199,7 @@ export const EditBlog = () => {
                   rules={[
                     {
                       required: true,
-                      message: "",
+                      message: "Please upload a banner",
                     },
                   ]}
                 >

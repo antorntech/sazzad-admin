@@ -142,26 +142,26 @@ const HeroContent = () => {
                 <div style={{ width: "60%" }}>
                   <h1
                     style={{
-                      fontSize: "20px",
+                      fontSize: "24px",
                       fontWeight: "bold",
                       width: "80%",
                     }}
                   >
                     {hero.title}
                   </h1>
-                  <p>
+                  <p style={{ fontSize: "16px", color: "#758694" }}>
                     <span style={{ fontWeight: "bold" }}>Facebook Link:</span>{" "}
                     {hero.facebookLink ? hero.facebookLink : "Not Available"}
                   </p>
-                  <p>
+                  <p style={{ fontSize: "16px", color: "#758694" }}>
                     <span style={{ fontWeight: "bold" }}>Linkedin Link:</span>{" "}
                     {hero.linkedinLink ? hero.linkedinLink : "Not Available"}
                   </p>
-                  <p>
+                  <p style={{ fontSize: "16px", color: "#758694" }}>
                     <span style={{ fontWeight: "bold" }}>Whatsapp Number:</span>{" "}
                     {hero.whatsappNumber}
                   </p>
-                  <p>
+                  <p style={{ fontSize: "16px", color: "#758694" }}>
                     <span style={{ fontWeight: "bold" }}>
                       Youtube Video Link:
                     </span>{" "}

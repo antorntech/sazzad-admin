@@ -23,6 +23,9 @@ import Notification from "./pages/Notification";
 import Association from "./pages/Association";
 import AddAssociation from "./pages/AddAssociation";
 import EditAssociation from "./pages/EditAssociation";
+import Events from "./pages/Events";
+import AddEvent from "./pages/AddEvent";
+import { EditEvent } from "./pages/EditEvent";
 
 function App() {
   const user = JSON.parse(localStorage.getItem("token"));
@@ -40,6 +43,9 @@ function App() {
               path="/edit-hero-content/:id"
               component={EditHeroContent}
             />
+            <Route exact path="/events" component={Events} />
+            <Route exact path="/events/add-event" component={AddEvent} />
+            <Route exact path="/events/edit-event/:id" component={EditEvent} />
             <Route exact path="/task-list" component={TaskList} />
             <Route exact path="/add-task-list" component={AddTaskList} />
             <Route exact path="/edit-task-list/:id" component={EditTaskList} />

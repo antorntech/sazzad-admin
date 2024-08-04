@@ -88,3 +88,55 @@
 //     )}
 //   />
 // </Table>
+
+{
+  /* <div className="card-main-wrapper">
+  {blogs.map((blog) => (
+    <div className="card-body-wrapper" key={blog._id}>
+      <div className="card-left">
+        <img src={`http://localhost:8000${blog.banner}`} alt="blog-banner" />
+      </div>
+      <div className="card-right">
+        <h1 style={{ margin: "0" }}>{blog.title}</h1>
+        <p>{blog.description}</p>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "5px",
+            marginTop: "10px",
+          }}
+        >
+          <i class="fa-solid fa-user"></i>
+          <p>{blog.author}</p>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "5px",
+            margin: "10px 0",
+          }}
+        >
+          <i class="fa-solid fa-calendar-days"></i>
+          <p>{blog.date}</p>
+        </div>
+        <div>
+          <Link to={`/blogs/edit-blog/${blog._id}`}>
+            <Button type="primary">
+              <EditOutlined />
+            </Button>
+          </Link>
+          <Button
+            type="danger"
+            onClick={() => showConfirm(blog._id)}
+            style={{ marginLeft: "10px" }}
+          >
+            <DeleteOutlined />
+          </Button>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>; */
+}
