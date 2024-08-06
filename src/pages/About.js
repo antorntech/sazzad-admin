@@ -115,58 +115,85 @@ const About = () => {
         {loading ? (
           <Loader />
         ) : about.length > 0 ? (
-          <Table
-            dataSource={about}
-            rowKey="_id"
-            scroll={{
-              x: 1000,
-            }}
-          >
-            <Column
-              title="Banner"
-              dataIndex="banner"
-              key="banner"
-              width="200px"
-              render={(banner) => (
-                <img
-                  src={`http://localhost:8000${banner}`}
-                  style={{ width: "100px", height: "80px" }}
-                />
-              )}
-            />
-            <Column title="Name" key="name" dataIndex="name" />
-            <Column title="Email" dataIndex="email" key="email" />
-            <Column title="Phone" dataIndex="phone" key="phone" />
-            <Column title="Address" dataIndex="address" key="address" />
-            <Column
-              title="Description"
-              key="description"
-              render={(_, record) => (
-                <Space>
-                  <p style={{ color: "#000" }}>
-                    {record.description.slice(0, 40)}...
+          <div>
+            {about.map((item, index) => (
+              <div
+                key={index}
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  marginBottom: "30px",
+                  gap: "20px",
+                }}
+              >
+                <div style={{ width: "40%" }}>
+                  <img src={`http://localhost:8000${item.banner}`} />
+                </div>
+                <div style={{ width: "60%" }}>
+                  <h1
+                    style={{
+                      fontSize: "24px",
+                      fontWeight: "bold",
+                      margin: "0",
+                    }}
+                  >
+                    {item.name}
+                  </h1>
+                  <p
+                    style={{
+                      fontSize: "16px",
+                      color: "#758694",
+                    }}
+                  >
+                    {item.designation}
                   </p>
-                </Space>
-              )}
-            />
-            <Column
-              title="Action"
-              key="action"
-              width="100px"
-              render={(_, record) => (
-                <Space size="middle">
-                  <Link to={`/about/edit-about/${record._id}`}>
-                    <Button type="primary">
-                      <EditOutlined />
+                  <p
+                    style={{
+                      fontSize: "16px",
+                      color: "#758694",
+                      textAlign: "justify",
+                      width: "90%",
+                    }}
+                  >
+                    {item.description}
+                  </p>
+                  <div>
+                    <p style={{ margin: "0" }}>Phone</p>
+                    <p
+                      style={{
+                        fontSize: "16px",
+                        color: "#758694",
+                        margin: "0",
+                      }}
+                    >
+                      {item.phone}
+                    </p>
+                  </div>
+                  <div>
+                    <p style={{ margin: "0" }}>Email</p>
+                    <p style={{ fontSize: "16px", color: "#758694" }}>
+                      {item.email}
+                    </p>
+                  </div>
+                  <div>
+                    <Link to={`/about/edit-about/${item._id}`}>
+                      <Button type="primary">
+                        <EditOutlined />
+                      </Button>
+                    </Link>
+                    <Button
+                      type="danger"
+                      onClick={() => showConfirm(item._id)}
+                      style={{ marginLeft: "10px" }}
+                    >
+                      <DeleteOutlined />
                     </Button>
-                  </Link>
-                  <Button type="danger" onClick={() => showConfirm(record._id)}>
-                    <DeleteOutlined />
-                  </Button>
-                </Space>
-              )}
-            />
-          </Table>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         ) : (
           <Loader />
         )}

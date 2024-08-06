@@ -124,6 +124,19 @@ const EditAbout = () => {
                   <Input />
                 </Form.Item>
                 <Form.Item
+                  name="designation"
+                  label="Designation"
+                  placeholder="Enter designation"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please enter designation",
+                    },
+                  ]}
+                >
+                  <Input />
+                </Form.Item>
+                <Form.Item
                   name="description"
                   label="Description"
                   placeholder="Enter description"
