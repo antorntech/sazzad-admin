@@ -1,4 +1,4 @@
-import { Space, Table, Button, Modal } from "antd";
+import { Space, Table, Button, Modal, Tooltip } from "antd";
 import {
   PlusOutlined,
   EditOutlined,
@@ -102,14 +102,7 @@ const About = () => {
             </p>
           </div>
           <div>
-            {about.length > 0 ? (
-              <Button type="primary" disabled>
-                <Link to="/about/add-about">
-                  <PlusOutlined style={{ marginRight: "5px" }} />
-                  Add About Details
-                </Link>
-              </Button>
-            ) : (
+            {about.length > 0 ? null : (
               <Button type="primary" className="primary-btn">
                 <Link to="/about/add-about">
                   <PlusOutlined style={{ marginRight: "5px" }} />
@@ -141,7 +134,6 @@ const About = () => {
                 />
               )}
             />
-            <Column title="Title" dataIndex="title" key="title" />
             <Column title="Name" key="name" dataIndex="name" />
             <Column title="Email" dataIndex="email" key="email" />
             <Column title="Phone" dataIndex="phone" key="phone" />

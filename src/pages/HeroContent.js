@@ -104,14 +104,7 @@ const HeroContent = () => {
             </p>
           </div>
           <div>
-            {heroContent.length > 0 ? (
-              <Button type="primary" disabled>
-                <Link to="/add-hero-content">
-                  <PlusOutlined style={{ marginRight: "5px" }} />
-                  Add Hero Content
-                </Link>
-              </Button>
-            ) : (
+            {heroContent.length > 0 ? null : (
               <Button type="primary" className="primary-btn">
                 <Link to="/add-hero-content">
                   <PlusOutlined style={{ marginRight: "5px" }} />

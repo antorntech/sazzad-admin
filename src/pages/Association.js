@@ -1,4 +1,4 @@
-import { Space, Table, Button, Modal } from "antd";
+import { Space, Table, Button, Modal, Tooltip } from "antd";
 import {
   PlusOutlined,
   EditOutlined,
@@ -105,13 +105,15 @@ const Association = () => {
             </p>
           </div>
           <div>
-            {association.length === 4 ? (
-              <Button type="primary" disabled>
-                <Link to="/add-association">
-                  <PlusOutlined style={{ marginRight: "5px" }} />
-                  Add Association
-                </Link>
-              </Button>
+            {association.length === 3 ? (
+              <Tooltip title="Can't add more than 3">
+                <Button type="primary" disabled>
+                  <Link to="/add-association">
+                    <PlusOutlined style={{ marginRight: "5px" }} />
+                    Add Association
+                  </Link>
+                </Button>
+              </Tooltip>
             ) : (
               <Button type="primary" className="primary-btn">
                 <Link to="/add-association">

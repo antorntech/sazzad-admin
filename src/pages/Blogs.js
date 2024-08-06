@@ -123,7 +123,11 @@ const Blogs = () => {
               render={(banner) => (
                 <img
                   src={`http://localhost:8000${banner}`}
-                  style={{ width: "120px", height: "120px" }}
+                  style={{
+                    width: "80px",
+                    height: "80px",
+                    borderRadius: "40px",
+                  }}
                 />
               )}
             />

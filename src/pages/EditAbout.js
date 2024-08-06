@@ -43,9 +43,9 @@ const EditAbout = () => {
     });
 
     // Append other form data
-    formData.append("title", values.title);
-    formData.append("description", values.description);
     formData.append("name", values.name);
+    formData.append("designation", values.designation);
+    formData.append("description", values.description);
     formData.append("email", values.email);
     formData.append("phone", values.phone);
     formData.append("address", values.address);
@@ -111,13 +111,13 @@ const EditAbout = () => {
             <Row gutter={[24, 0]}>
               <Col xs={24} md={24} lg={24}>
                 <Form.Item
-                  name="title"
-                  label="Title"
-                  placeholder="Enter title"
+                  name="name"
+                  label="Name"
+                  placeholder="Enter name"
                   rules={[
                     {
                       required: true,
-                      message: "Please enter hero content title",
+                      message: "Please enter name",
                     },
                   ]}
                 >
@@ -136,45 +136,38 @@ const EditAbout = () => {
                 >
                   <Input.TextArea rows={6} />
                 </Form.Item>
-                <Form.Item
-                  name="name"
-                  label="Name"
-                  placeholder="Enter name"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please enter name",
-                    },
-                  ]}
-                >
-                  <Input />
-                </Form.Item>
-                <Form.Item
-                  name="email"
-                  label="Email"
-                  placeholder="Enter email"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please enter email",
-                    },
-                  ]}
-                >
-                  <Input />
-                </Form.Item>
-                <Form.Item
-                  name="phone"
-                  label="Phone"
-                  placeholder="Enter phone"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please enter phone",
-                    },
-                  ]}
-                >
-                  <Input />
-                </Form.Item>
+                <Row gutter={[24, 0]}>
+                  <Col xs={24} md={12} lg={12}>
+                    <Form.Item
+                      name="email"
+                      label="Email"
+                      placeholder="Enter email"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please enter email",
+                        },
+                      ]}
+                    >
+                      <Input />
+                    </Form.Item>
+                  </Col>
+                  <Col xs={24} md={12} lg={12}>
+                    <Form.Item
+                      name="phone"
+                      label="Phone"
+                      placeholder="Enter phone"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please enter phone",
+                        },
+                      ]}
+                    >
+                      <Input />
+                    </Form.Item>
+                  </Col>
+                </Row>
                 <Form.Item
                   name="address"
                   label="Address"
@@ -182,7 +175,7 @@ const EditAbout = () => {
                   rules={[
                     {
                       required: true,
-                      message: "Please enter hero content address",
+                      message: "Please enter about address",
                     },
                   ]}
                 >
@@ -204,7 +197,6 @@ const EditAbout = () => {
                 </Form.Item>
               </Col>
             </Row>
-
             <Form.Item>
               <Button type="primary" className="primary-btn" htmlType="submit">
                 Submit

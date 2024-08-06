@@ -1,4 +1,4 @@
-import { Space, Table, Button, Modal } from "antd";
+import { Space, Table, Button, Modal, Tooltip } from "antd";
 import {
   PlusOutlined,
   EditOutlined,
@@ -106,12 +106,14 @@ const TaskList = () => {
           </div>
           <div>
             {taskList.length === 4 ? (
-              <Button type="primary" disabled>
-                <Link to="/add-task-list">
-                  <PlusOutlined style={{ marginRight: "5px" }} />
-                  Add Task List
-                </Link>
-              </Button>
+              <Tooltip title="Can't add more than 4">
+                <Button type="primary" disabled>
+                  <Link to="/add-task-list">
+                    <PlusOutlined style={{ marginRight: "5px" }} />
+                    Add Task List
+                  </Link>
+                </Button>
+              </Tooltip>
             ) : (
               <Button type="primary" className="primary-btn">
                 <Link to="/add-task-list">
