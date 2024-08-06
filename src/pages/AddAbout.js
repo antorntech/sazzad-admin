@@ -6,7 +6,9 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 const AddAbout = () => {
   const navigate = useHistory();
 
-  const [bannerFileList, setBannerFileList] = useState([]);
+  const [mainBannerFileList, setMainBannerFileList] = useState([]);
+  const [homeBanner1FileList, setHomeBanner1FileList] = useState([]);
+  const [homeBanner2FileList, setHomeBanner2FileList] = useState([]);
   // eslint-disable-next-line no-unused-vars
   const [uploading, setUploading] = useState(false);
 
@@ -14,8 +16,16 @@ const AddAbout = () => {
     const formData = new FormData();
 
     // Append user photo file to formData
-    bannerFileList.forEach((file) => {
-      formData.append("banner", file);
+    mainBannerFileList.forEach((file) => {
+      formData.append("main_banner", file);
+    });
+
+    homeBanner1FileList.forEach((file) => {
+      formData.append("home_banner1", file);
+    });
+
+    homeBanner2FileList.forEach((file) => {
+      formData.append("home_banner2", file);
     });
 
     // Append other form data
@@ -37,7 +47,9 @@ const AddAbout = () => {
       .then((res) => res.json())
       .then(() => {
         // Reset form
-        setBannerFileList([]);
+        setMainBannerFileList([]);
+        setHomeBanner1FileList([]);
+        setHomeBanner2FileList([]);
         message.success("About Added Successfully.");
         navigate.push("/about");
       })
@@ -49,18 +61,46 @@ const AddAbout = () => {
       });
   };
 
-  const bannerFileProps = {
+  const mainBannerFileProps = {
     onRemove: (file) => {
-      const index = bannerFileList.indexOf(file);
-      const newFileList = bannerFileList.slice();
+      const index = mainBannerFileList.indexOf(file);
+      const newFileList = mainBannerFileList.slice();
       newFileList.splice(index, 1);
-      setBannerFileList(newFileList);
+      setMainBannerFileList(newFileList);
     },
     beforeUpload: (file) => {
-      setBannerFileList([...bannerFileList, file]);
+      setMainBannerFileList([...mainBannerFileList, file]);
       return false; // Prevent default upload behavior
     },
-    fileList: bannerFileList,
+    fileList: mainBannerFileList,
+  };
+
+  const homeBanner1FileProps = {
+    onRemove: (file) => {
+      const index = homeBanner1FileList.indexOf(file);
+      const newFileList = homeBanner1FileList.slice();
+      newFileList.splice(index, 1);
+      setHomeBanner1FileList(newFileList);
+    },
+    beforeUpload: (file) => {
+      setHomeBanner1FileList([...homeBanner1FileList, file]);
+      return false; // Prevent default upload behavior
+    },
+    fileList: homeBanner1FileList,
+  };
+
+  const homeBanner2FileProps = {
+    onRemove: (file) => {
+      const index = homeBanner2FileList.indexOf(file);
+      const newFileList = homeBanner2FileList.slice();
+      newFileList.splice(index, 1);
+      setHomeBanner2FileList(newFileList);
+    },
+    beforeUpload: (file) => {
+      setHomeBanner2FileList([...homeBanner2FileList, file]);
+      return false; // Prevent default upload behavior
+    },
+    fileList: homeBanner2FileList,
   };
 
   return (
@@ -160,20 +200,56 @@ const AddAbout = () => {
                 >
                   <Input />
                 </Form.Item>
-                <Form.Item
-                  name="banner"
-                  label="Upload Banner"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please enter banner",
-                    },
-                  ]}
-                >
-                  <Upload {...bannerFileProps}>
-                    <Button icon={<UploadOutlined />}>Select File</Button>
-                  </Upload>
-                </Form.Item>
+                <Row>
+                  <Col xs={24} md={8} lg={8}>
+                    <Form.Item
+                      name="main_banner"
+                      label="Upload Main Banner"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please enter main banner",
+                        },
+                      ]}
+                    >
+                      <Upload {...mainBannerFileProps}>
+                        <Button icon={<UploadOutlined />}>Select File</Button>
+                      </Upload>
+                    </Form.Item>
+                  </Col>
+                  <Col xs={24} md={8} lg={8}>
+                    <Form.Item
+                      name="home_banner1"
+                      label="Upload Home Banner 1"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please enter home banner 1",
+                        },
+                      ]}
+                    >
+                      <Upload {...homeBanner1FileProps}>
+                        <Button icon={<UploadOutlined />}>Select File</Button>
+                      </Upload>
+                    </Form.Item>
+                  </Col>
+                  <Col xs={24} md={8} lg={8}>
+                    <Form.Item
+                      name="home_banner2"
+                      label="Upload Home Banner 2"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please enter home banner 2",
+                        },
+                      ]}
+                    >
+                      <Upload {...homeBanner2FileProps}>
+                        <Button icon={<UploadOutlined />}>Select File</Button>
+                      </Upload>
+                    </Form.Item>
+                  </Col>
+                </Row>
               </Col>
             </Row>
             <Form.Item>

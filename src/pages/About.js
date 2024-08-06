@@ -128,7 +128,7 @@ const About = () => {
                 }}
               >
                 <div style={{ width: "40%" }}>
-                  <img src={`http://localhost:8000${item.banner}`} />
+                  <img src={`http://localhost:8000${item.main_banner}`} />
                 </div>
                 <div style={{ width: "60%" }}>
                   <h1
@@ -143,7 +143,7 @@ const About = () => {
                   <p
                     style={{
                       fontSize: "16px",
-                      color: "#758694",
+                      color: "#000b6c",
                     }}
                   >
                     {item.designation}
