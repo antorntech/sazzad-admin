@@ -32,7 +32,7 @@ function Sidenav({ color }) {
           alt="logo"
           style={{
             height: "40px",
-            margin: "25px 0",
+            margin: "15px 0",
           }}
         />
       </div>
