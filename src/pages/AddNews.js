@@ -1,98 +1,93 @@
-import { UploadOutlined } from "@ant-design/icons";
+import React, { useState } from "react";
+import { CloseCircleOutlined, UploadOutlined } from "@ant-design/icons";
 import {
-  Button,
-  Col,
-  DatePicker,
   Form,
   Input,
-  Row,
   Upload,
+  Button,
   message,
+  Row,
+  Col,
+  DatePicker,
 } from "antd";
+import { useHistory } from "react-router-dom";
 import TextArea from "antd/lib/input/TextArea";
-import React, { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
-import moment from "moment";
 
-export const EditBlog = () => {
+const AddNews = () => {
   const navigate = useHistory();
-  const { id } = useParams();
-  const [form] = Form.useForm();
-  const [blogData, setBlogData] = useState({});
-  const [bannerFileList, setBannerFileList] = useState([]);
+
   const [uploading, setUploading] = useState(false);
-  const [date, setDate] = useState(moment()); // Initialize with moment object
+  const formatDate = (dateString) => {
+    // Split the date string into year, month, and day
+    const [year, month, day] = dateString.split("-");
 
-  useEffect(() => {
-    fetch(`http://localhost:8000/api/v1/blogs/${id}`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
-      },
-    })
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Failed to fetch Blog data");
-        }
-        return res.json();
-      })
-      .then((data) => {
-        // Parse date into moment object
-        data.date = moment(data.date, "D MMM - YYYY");
+    // Create a Date object from the splitted parts
+    const dateObject = new Date(dateString);
 
-        setBlogData(data);
-        form.setFieldsValue(data);
-        setDate(moment(data.date)); // Set date state as moment object
-      })
-      .catch((error) => {
-        console.error("Error fetching Blog data:", error);
-        message.error("Failed to fetch Blog data");
-      });
-  }, [id, form]);
+    // Format the month using an array of month names
+    const monthNames = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    const monthName = monthNames[dateObject.getMonth()];
 
-  const formatDate = (date) => {
-    setDate(date); // Update date state with moment object
+    // Construct the formatted date string
+    const formattedDate = `${parseInt(day, 10)} ${monthName} - ${year}`;
+
+    setDate(formattedDate);
   };
+
+  const [date, setDate] = useState("");
+
+  const [bannerFileList, setBannerFileList] = useState([]);
 
   const handleUpload = (values) => {
     const formData = new FormData();
 
-    // Append user photo file to formData
     bannerFileList.forEach((file) => {
       formData.append("banner", file);
     });
 
-    // Append other form data
     formData.append("title", values.title);
     formData.append("description", values.description);
-    formData.append("date", date.format("D MMM - YYYY")); // Format date for backend
+    formData.append("date", date);
     formData.append("author", values.author);
     setUploading(true);
+
     // You can use any AJAX library you like
-    fetch(`http://localhost:8000/api/v1/blogs/update/${id}`, {
-      method: "PUT",
+    fetch("http://localhost:8000/api/v1/news/add", {
+      method: "POST",
       headers: {
         Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
       },
       body: formData,
     })
       .then((res) => {
-        if (!res.ok) {
-          throw new Error("Failed to update blog data");
+        if (res.ok) {
+          return res.json();
         }
-        return res.json();
+        throw new Error("Network response was not ok.");
       })
       .then(() => {
-        message.success("Blog data updated successfully.");
-        navigate.push("/blogs");
+        setBannerFileList([]);
+        message.success("News Added Successfully.");
+        navigate.push("/news");
       })
       .catch((error) => {
-        console.error("Failed to update blog data:", error);
-        message.error("Failed to update blog data.");
+        console.error("Blog Add Failed:", error);
+        message.error("Blog Add Failed.");
       })
-      .finally(() => {
-        setUploading(false);
-      });
+      .finally(() => setUploading(false));
   };
 
   const bannerFileProps = {
@@ -104,7 +99,7 @@ export const EditBlog = () => {
     },
     beforeUpload: (file) => {
       setBannerFileList([...bannerFileList, file]);
-      return false;
+      return false; // Prevent default upload behavior
     },
     fileList: bannerFileList,
   };
@@ -113,18 +108,13 @@ export const EditBlog = () => {
     <>
       <div>
         <h1 style={{ fontSize: "20px", fontWeight: "bold", margin: "0px" }}>
-          Edit Blog
+          Add News
         </h1>
-        <p>You can edit blog from here.</p>
+        <p>You can add news from here.</p>
       </div>
       <Row gutter={[24, 0]}>
         <Col xs={24} md={12} lg={12}>
-          <Form
-            onFinish={handleUpload}
-            layout="vertical"
-            form={form}
-            initialValues={blogData}
-          >
+          <Form onFinish={handleUpload} layout="vertical">
             <Row gutter={[24, 0]}>
               <Col xs={24} md={24} lg={24}>
                 <Form.Item
@@ -182,8 +172,7 @@ export const EditBlog = () => {
                       ]}
                     >
                       <DatePicker
-                        value={moment(date)} // Set value prop to moment object
-                        onChange={(date) => formatDate(date)} // Update date state
+                        onChange={(date, dateString) => formatDate(dateString)}
                         style={{
                           width: "100%",
                           padding: "7px",
@@ -199,7 +188,7 @@ export const EditBlog = () => {
                   rules={[
                     {
                       required: true,
-                      message: "Please upload a banner",
+                      message: "",
                     },
                   ]}
                 >
@@ -221,3 +210,5 @@ export const EditBlog = () => {
     </>
   );
 };
+
+export default AddNews;

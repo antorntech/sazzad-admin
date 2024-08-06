@@ -14,17 +14,17 @@ import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import moment from "moment";
 
-export const EditBlog = () => {
+export const EditNews = () => {
   const navigate = useHistory();
   const { id } = useParams();
   const [form] = Form.useForm();
-  const [blogData, setBlogData] = useState({});
+  const [newsData, setNewsData] = useState({});
   const [bannerFileList, setBannerFileList] = useState([]);
   const [uploading, setUploading] = useState(false);
   const [date, setDate] = useState(moment()); // Initialize with moment object
 
   useEffect(() => {
-    fetch(`http://localhost:8000/api/v1/blogs/${id}`, {
+    fetch(`http://localhost:8000/api/v1/news/${id}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
@@ -40,7 +40,7 @@ export const EditBlog = () => {
         // Parse date into moment object
         data.date = moment(data.date, "D MMM - YYYY");
 
-        setBlogData(data);
+        setNewsData(data);
         form.setFieldsValue(data);
         setDate(moment(data.date)); // Set date state as moment object
       })
@@ -69,7 +69,7 @@ export const EditBlog = () => {
     formData.append("author", values.author);
     setUploading(true);
     // You can use any AJAX library you like
-    fetch(`http://localhost:8000/api/v1/blogs/update/${id}`, {
+    fetch(`http://localhost:8000/api/v1/news/update/${id}`, {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
@@ -78,17 +78,17 @@ export const EditBlog = () => {
     })
       .then((res) => {
         if (!res.ok) {
-          throw new Error("Failed to update blog data");
+          throw new Error("Failed to update news data");
         }
         return res.json();
       })
       .then(() => {
-        message.success("Blog data updated successfully.");
-        navigate.push("/blogs");
+        message.success("News data updated successfully.");
+        navigate.push("/news");
       })
       .catch((error) => {
-        console.error("Failed to update blog data:", error);
-        message.error("Failed to update blog data.");
+        console.error("Failed to update news data:", error);
+        message.error("Failed to update news data.");
       })
       .finally(() => {
         setUploading(false);
@@ -113,9 +113,9 @@ export const EditBlog = () => {
     <>
       <div>
         <h1 style={{ fontSize: "20px", fontWeight: "bold", margin: "0px" }}>
-          Edit Blog
+          Edit News
         </h1>
-        <p>You can edit blog from here.</p>
+        <p>You can edit news from here.</p>
       </div>
       <Row gutter={[24, 0]}>
         <Col xs={24} md={12} lg={12}>
@@ -123,7 +123,7 @@ export const EditBlog = () => {
             onFinish={handleUpload}
             layout="vertical"
             form={form}
-            initialValues={blogData}
+            initialValues={newsData}
           >
             <Row gutter={[24, 0]}>
               <Col xs={24} md={24} lg={24}>

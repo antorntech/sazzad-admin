@@ -67,7 +67,7 @@ export const EditEvent = () => {
     formData.append("title", values.title);
     formData.append("description", values.description);
     formData.append("address", values.address);
-    formData.append("date", date.format("YYYY-MM-DD")); // Format date for backend
+    formData.append("date", date.format("D MMM - YYYY")); // Format date for backend
 
     // Append event start and end times
     formData.append(

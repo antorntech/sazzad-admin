@@ -26,6 +26,9 @@ import EditAssociation from "./pages/EditAssociation";
 import Events from "./pages/Events";
 import AddEvent from "./pages/AddEvent";
 import { EditEvent } from "./pages/EditEvent";
+import News from "./pages/News";
+import AddNews from "./pages/AddNews";
+import { EditNews } from "./pages/EditNews";
 
 function App() {
   const user = JSON.parse(localStorage.getItem("token"));
@@ -52,6 +55,9 @@ function App() {
             <Route exact path="/blogs" component={Blogs} />
             <Route exact path="/blogs/add-blog" component={AddBlog} />
             <Route exact path="/blogs/edit-blog/:id" component={EditBlog} />
+            <Route exact path="/news" component={News} />
+            <Route exact path="/news/add-news" component={AddNews} />
+            <Route exact path="/news/edit-news/:id" component={EditNews} />
             <Route exact path="/about" component={About} />
             <Route exact path="/about/add-about" component={AddAbout} />
             <Route exact path="/about/edit-about/:id" component={EditAbout} />
