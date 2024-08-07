@@ -3174,3 +3174,147 @@ section.ant-layout.ant-layout-has-sider.layout-dashboard.layout-profile
   color: #8c8c8c;
   text-align: justify;
 }
+
+/* home css style */
+.home-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.home-head h1 {
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.home-head .date {
+  font-size: 18px;
+  background-color: #18377e;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: #fff;
+}
+
+.home-banner {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  margin: 20px 0px;
+  justify-content: space-between;
+  background-image: url("/public/images/banner.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.home-banner .banner-left {
+  width: 60%;
+  padding-left: 20px;
+}
+
+.home-banner .banner-right {
+  text-align: right;
+  width: 40%;
+}
+
+.home-banner h1 {
+  font-size: 30px;
+  font-weight: bold;
+  line-height: 1.5;
+  margin: 0;
+  color: #000000;
+}
+
+.home-banner p {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.5;
+  margin: 0;
+  color: #fff8f3;
+}
+
+.home-card-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.home-card-main .home-card {
+  padding: 10px;
+  width: 100%;
+}
+
+.home-card-main .home-card-1 {
+  background-image: url("/public/images/cardbg1.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-radius: 10px;
+}
+
+.home-card-main .home-card-2 {
+  background-image: url("/public/images/cardbg2.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-radius: 10px;
+}
+
+.home-card-main .home-card-3 {
+  background-image: url("/public/images/cardbg3.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-radius: 10px;
+}
+
+.home-card-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.home-card-main .home-card h1 {
+  font-size: 30px;
+  font-weight: bold;
+  line-height: 1.5;
+  margin: 0;
+  color: #fff;
+}
+
+.home-card-main .home-card h2 {
+  font-size: 50px;
+  font-weight: bold;
+  line-height: 1.5;
+  margin: 0;
+  color: #ffffff;
+}
+
+.home-card-main .home-card i {
+  color: #fff;
+  font-size: 40px;
+}
+
+.home-right-main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.home-right-main .home-right-content h1 {
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.home-right-main .home-right-content p {
+  font-size: 12px;
+}

@@ -69,6 +69,37 @@
 }
 
 @media (max-width: 768px) {
+  .home-banner {
+    display: flex;
+    padding: 0 10px;
+    flex-direction: column;
+  }
+
+  .home-banner .banner-left {
+    width: 100%;
+    padding-left: 0;
+  }
+
+  .home-banner .banner-left h1 {
+    font-size: 24px;
+    margin-top: 15px;
+  }
+
+  .home-banner .banner-right {
+    width: 100%;
+    text-align: end;
+  }
+
+  .home-banner .banner-right img {
+    width: 100%;
+    height: auto;
+  }
+
+  .home-card-main {
+    display: flex;
+    flex-direction: column;
+  }
+
   .layout-dashboard.layout-dashboard-rtl .header-control {
     justify-content: flex-end;
   }
