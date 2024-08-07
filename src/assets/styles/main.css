@@ -3220,6 +3220,11 @@ section.ant-layout.ant-layout-has-sider.layout-dashboard.layout-profile
   width: 40%;
 }
 
+.home-banner .banner-right img {
+  width: 300px;
+  height: 350px;
+}
+
 .home-banner h1 {
   font-size: 30px;
   font-weight: bold;

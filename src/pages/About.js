@@ -95,7 +95,9 @@ const About = () => {
           }}
         >
           <div>
-            <h1>About Details</h1>
+            <h1 style={{ fontSize: "20px", fontWeight: "bold", margin: "0px" }}>
+              About Details
+            </h1>
             <p>
               About details are{" "}
               {about.length > 0 ? "available." : "not available."}

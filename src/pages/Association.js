@@ -98,7 +98,9 @@ const Association = () => {
           }}
         >
           <div>
-            <h1>Association</h1>
+            <h1 style={{ fontSize: "20px", fontWeight: "bold", margin: "0px" }}>
+              Association
+            </h1>
             <p>
               Associations are{" "}
               {association.length > 0 ? "available." : "not available."}

@@ -6,7 +6,7 @@ function Home() {
   const [events, setEvents] = useState([]);
   const [news, setNews] = useState([]);
   const [blogs, setBlogs] = useState([]);
-  const todayDate = moment().format(" MMMM Do, YYYY");
+  const todayDate = moment().format("ddd, MMMM Do - YYYY");
 
   const token = JSON.parse(localStorage.getItem("token"));
   // Get all events
@@ -117,12 +117,11 @@ function Home() {
               <div className="home-banner">
                 <div className="banner-left">
                   <h1>
-                    Hello,{" "}
-                    <span style={{ color: "#fff" }}>Dr. Sazzad Hossain</span>
+                    Hello, <span style={{ color: "#fff" }}>MD ABDUL HAMID</span>
                   </h1>
                   <p>
-                    With a wealth of experience and expertise, Dr. Hossain has
-                    been actively involved in shaping the higher education
+                    With a wealth of experience and expertise, MD ABDUL HAMID
+                    has been actively involved in shaping the higher education
                     landscape in Bangladesh. His commitment to academic
                     excellence, coupled with a passion for research and
                     development, has garnered him respect and admiration from
@@ -190,9 +189,9 @@ function Home() {
                       margin: "0px",
                     }}
                   >
-                    Dr. Sazzad Hossain
+                    MD ABDUL HAMID
                   </h1>
-                  <p>Chief Advisor, NSO</p>
+                  <p>COO, PeopleNTech IT</p>
                 </div>
               </div>
               <div style={{ width: "100%", marginTop: "10px" }}>

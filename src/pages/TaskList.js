@@ -98,7 +98,9 @@ const TaskList = () => {
           }}
         >
           <div>
-            <h1>Task List</h1>
+            <h1 style={{ fontSize: "20px", fontWeight: "bold", margin: "0px" }}>
+              Task List
+            </h1>
             <p>
               Task Lists are{" "}
               {taskList.length > 0 ? "available." : "not available."}
